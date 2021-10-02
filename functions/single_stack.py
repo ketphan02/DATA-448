@@ -9,15 +9,15 @@ def viz(df, class_avg, field, name, save_dir, max_num=15):
     data = df[field]
     sums = sum(data)
     avg = class_avg[field]
-    labels = list(df['Name'])[::-1]
-    labels.insert(0, 'Average')
+    labels = list(df["Name"])[::-1]
+    labels.insert(0, "Average")
 
     fig, ax = plt.subplots(figsize=(6.5, 6))
-    ax.plot(['foo', field, 'bar'], [avg * 3] * 3,
-            linestyle='--', color='red', linewidth=3)
-    for i in range(len(data) - 1,  -1, -1):
-        ax.bar(height=[0, sums, 0], x=['foo', field, 'bar'],
-               color=colors[i], width=1)
+    ax.plot(
+        ["foo", field, "bar"], [avg * 3] * 3, linestyle="--", color="red", linewidth=3
+    )
+    for i in range(len(data) - 1, -1, -1):
+        ax.bar(height=[0, sums, 0], x=["foo", field, "bar"], color=colors[i], width=1)
         sums -= data[i]
 
     ax.xaxis.set_visible(False)
