@@ -4,8 +4,9 @@ import seaborn as sns
 
 colors = sns.color_palette("Set2")
 
+
 def viz(df, class_avg, field, name, save_dir, max_num=15):
-    '''
+    """
     Visualize the single stacked plot for a single field with a line representing class average crossing the graph.
 
     Parameters
@@ -22,7 +23,7 @@ def viz(df, class_avg, field, name, save_dir, max_num=15):
         The directory to save the plot.
     max_num: int
         The maximum length of y axis.
-    '''
+    """
     data = df[field]
     sums = sum(data)
     avg = class_avg[field]

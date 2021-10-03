@@ -4,7 +4,7 @@ import seaborn as sns
 
 
 def viz(df, class_avg, field, name, save_dir, max_num=5):
-    '''
+    """
     Visualize n bars with n people of a particular field plus one bar for the class average.
 
     Parameters
@@ -21,7 +21,7 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
         The directory to save the plot.
     max_num: int
         The maximum length of y axis.
-    '''
+    """
     data = df.append(class_avg)
     colors = sns.color_palette("Set2")
     colors[len(data) - 1] = "red"
