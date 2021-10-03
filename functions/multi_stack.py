@@ -13,8 +13,8 @@ def viz(df, name, save_dir, max_len=15) -> None:
     ----------
     df: pandas.DataFrame
             Dataframe to be visualized.
-	class_avg: dfFrame or list
-		DataFrame or list of class average.
+        class_avg: dfFrame or list
+                DataFrame or list of class average.
     name: str
             Title of the plot.
     save_dir: str
