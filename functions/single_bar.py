@@ -7,6 +7,24 @@ colors = sns.color_palette("Set2")
 
 
 def viz(df, class_avg, field, name, save_dir, max_num=5):
+    '''
+    Visualize two bar graphs (choosen field and class average of that field).
+
+    Parameters
+    ----------
+    df: pandas.DataFrame
+        Dataframe containing the data.
+    class_avg: pandas.DataFrame or dict
+        Dataframe or dictionary containing the class averages of different fields.
+    field: str
+        The field to be visualized.
+    name: str
+        The title of the field.
+    save_dir: str
+        The directory to save the plot.
+    max_num: int
+        The maximum length of y axis.
+    '''
     data = df[field]
     team_avg = sum(data) / len(data)
     avg = class_avg[field]

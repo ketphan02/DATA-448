@@ -4,6 +4,24 @@ import seaborn as sns
 
 
 def viz(df, class_avg, field, name, save_dir, max_num=5):
+    '''
+    Visualize n bars with n people of a particular field plus one bar for the class average.
+
+    Parameters
+    ----------
+    df: pandas.DataFrame
+        Dataframe containing the data.
+    class_avg: pandas.DataFrame or dict
+        Dataframe or dictionary containing the class averages of different fields.
+    field: str
+        The field to be visualized.
+    name: str
+        The title of the field.
+    save_dir: str
+        The directory to save the plot.
+    max_num: int
+        The maximum length of y axis.
+    '''
     data = df.append(class_avg)
     colors = sns.color_palette("Set2")
     colors[len(data) - 1] = "red"
