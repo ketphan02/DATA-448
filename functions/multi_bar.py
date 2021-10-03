@@ -1,5 +1,5 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def viz(df, class_avg, field, name, save_dir, max_num=5):
