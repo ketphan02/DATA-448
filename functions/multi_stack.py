@@ -4,14 +4,16 @@ import numpy as np
 
 colors = sns.color_palette("Set2")
 
-def viz(df, name, save_dir, max_len = 15) -> None:
+def viz(df, class_avg, name, save_dir, max_len = 15) -> None:
     '''
 	Visualize multiple stacked plot.
 
 	Parameters:
 	----------
-	df: pandas.DataFrame
-		Dataframe to be visualized.
+	df: pandas.dfFrame
+		dfframe to be visualized.
+	class_avg: dfFrame or list
+		DataFrame or list of class average.
 	name: str
 		Title of the plot.
 	save_dir: str
@@ -20,16 +22,15 @@ def viz(df, name, save_dir, max_len = 15) -> None:
 		Maximum length of the y axis.
     '''
 
-    # Clean data for graph x labels
+    # Clean df for graph x labels
     fields = df.columns[1:].tolist()
     fields.insert(0, '')
     fields.append('')
     
-    # Clean data for graph legend
-    data = team_a
-    labels = list(data["Name"])
+    # Clean df for graph legend
+    labels = list(df["Name"])
     labels.insert(0, "Average")
-    data = data.drop(columns='Name')
+    df = df.drop(columns='Name')
     
     # padding for the graph x axis
     avg = class_avg.drop(columns='Name').iloc[[0]].values[0].tolist()
@@ -37,16 +38,16 @@ def viz(df, name, save_dir, max_len = 15) -> None:
     avg.append(0)
     
     # padding for the graph y axis
-    data.loc[len(data)] = 0
-    data.loc[-1] = 0
-    data.index = data.index + 1
-    data = data.sort_index()
+    df.loc[len(df)] = 0
+    df.loc[-1] = 0
+    df.index = df.index + 1
+    df = df.sort_index()
     
     # visualize
     fig, ax = plt.subplots(figsize=(9, 6))
 
     avg_lw = 1 / (len(fields) - 1)
-    sums = sum(data.values).tolist()
+    sums = sum(df.values).tolist()
 
     for i in range(1, len(fields) - 1):
         width = i * avg_lw
@@ -69,7 +70,7 @@ def viz(df, name, save_dir, max_len = 15) -> None:
             )
 
         ax.bar(height=sums, x=np.arange(avg_lw, 1 - avg_lw, avg_lw), width=0.15, color=colors[i - 1])
-        sums = sums - data.iloc[[i]].values[0]
+        sums = sums - df.iloc[[i]].values[0]
 
     ax.set_xticks(np.arange(0, 1 + avg_lw, avg_lw).tolist())
     plt.yticks(np.arange(0, max_len + 1).tolist())
