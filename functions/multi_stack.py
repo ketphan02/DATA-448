@@ -5,22 +5,22 @@ import seaborn as sns
 colors = sns.color_palette("Set2")
 
 
-def viz(df, name, save_dir, max_len=15) -> None:
+def viz(df, class_avg, name, save_dir, max_len=15) -> None:
     """
     Visualize multiple stacked plot.
 
     Parameters:
     ----------
     df: pandas.DataFrame
-            Dataframe to be visualized.
-	class_avg: dfFrame or list
-		DataFrame or list of class average.
+        DataFrame to be visualized.
+	class_avg: dfFrame
+		DataFrame of class average.
     name: str
-            Title of the plot.
+        Title of the plot.
     save_dir: str
-            Directory to save the visualization.
-    max_len: int
-            Maximum length of the y axis.
+        Directory to save the visualization.
+    max_len: int (default=15)
+        Maximum length of the y axis.
     """
 
     # Clean df for graph x labels
@@ -28,11 +28,10 @@ def viz(df, name, save_dir, max_len=15) -> None:
     fields.insert(0, "")
     fields.append("")
 
-    # Clean data for graph legend
-    data = team_a
-    labels = list(data["Name"])
+    # Clean df for graph legend
+    labels = list(df["Name"])
     labels.insert(0, "Average")
-    data = data.drop(columns="Name")
+    df = df.drop(columns="Name")
 
     # padding for the graph x axis
     avg = class_avg.drop(columns="Name").iloc[[0]].values[0].tolist()
@@ -40,10 +39,10 @@ def viz(df, name, save_dir, max_len=15) -> None:
     avg.append(0)
 
     # padding for the graph y axis
-    data.loc[len(data)] = 0
-    data.loc[-1] = 0
-    data.index = data.index + 1
-    data = data.sort_index()
+    df.loc[len(df)] = 0
+    df.loc[-1] = 0
+    df.index = df.index + 1
+    df = df.sort_index()
 
     # visualize
     fig, ax = plt.subplots(figsize=(9, 6))
@@ -79,7 +78,7 @@ def viz(df, name, save_dir, max_len=15) -> None:
             width=0.15,
             color=colors[i - 1],
         )
-        sums = sums - data.iloc[[i]].values[0]
+        sums = sums - df.iloc[[i]].values[0]
 
     ax.set_xticks(np.arange(0, 1 + avg_lw, avg_lw).tolist())
     plt.yticks(np.arange(0, max_len + 1).tolist())

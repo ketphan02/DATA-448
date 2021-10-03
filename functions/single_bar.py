@@ -22,7 +22,7 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
         The title of the field.
     save_dir: str
         The directory to save the plot.
-    max_num: int
+    max_num: int (default=5)
         The maximum length of y axis.
     """
     data = df[field]

@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
+colors = sns.color_palette("Set2")
 
 def viz(df, class_avg, field, name, save_dir, max_num=5):
     """
@@ -19,11 +20,10 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
         The title of the field.
     save_dir: str
         The directory to save the plot.
-    max_num: int
+    max_num: int (default=5)
         The maximum length of y axis.
     """
     data = df.append(class_avg)
-    colors = sns.color_palette("Set2")
     colors[len(data) - 1] = "red"
 
     fig, ax = plt.subplots(figsize=(6.5, 6))
