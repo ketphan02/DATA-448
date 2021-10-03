@@ -6,34 +6,34 @@ colors = sns.color_palette("Set2")
 
 
 def viz(df, name, save_dir, max_len=15) -> None:
-    '''
-        Visualize multiple stacked plot.
+    """
+    Visualize multiple stacked plot.
 
-        Parameters:
-        ----------
-        df: pandas.DataFrame
-                Dataframe to be visualized.
-        name: str
-                Title of the plot.
-        save_dir: str
-                Directory to save the visualization.
-        max_len: int
-                Maximum length of the y axis.
-    '''
+    Parameters:
+    ----------
+    df: pandas.DataFrame
+            Dataframe to be visualized.
+    name: str
+            Title of the plot.
+    save_dir: str
+            Directory to save the visualization.
+    max_len: int
+            Maximum length of the y axis.
+    """
 
     # Clean data for graph x labels
     fields = df.columns[1:].tolist()
-    fields.insert(0, '')
-    fields.append('')
+    fields.insert(0, "")
+    fields.append("")
 
     # Clean data for graph legend
     data = team_a
     labels = list(data["Name"])
     labels.insert(0, "Average")
-    data = data.drop(columns='Name')
+    data = data.drop(columns="Name")
 
     # padding for the graph x axis
-    avg = class_avg.drop(columns='Name').iloc[[0]].values[0].tolist()
+    avg = class_avg.drop(columns="Name").iloc[[0]].values[0].tolist()
     avg.insert(0, 0)
     avg.append(0)
 
@@ -54,23 +54,29 @@ def viz(df, name, save_dir, max_len=15) -> None:
         if i > 1:
             ax.axhline(
                 y=avg[i],
-                xmax=width + (avg_lw / 2), xmin=width - (avg_lw / 2),
+                xmax=width + (avg_lw / 2),
+                xmin=width - (avg_lw / 2),
                 linewidth=3,
-                linestyle='--',
-                color='red',
-                label='_nolegend_'
+                linestyle="--",
+                color="red",
+                label="_nolegend_",
             )
         else:
             ax.axhline(
                 y=avg[i],
-                xmax=width + (avg_lw / 2), xmin=width - (avg_lw / 2),
+                xmax=width + (avg_lw / 2),
+                xmin=width - (avg_lw / 2),
                 linewidth=3,
-                linestyle='--',
-                color='red',
+                linestyle="--",
+                color="red",
             )
 
-        ax.bar(height=sums, x=np.arange(avg_lw, 1 - avg_lw, avg_lw),
-               width=0.15, color=colors[i - 1])
+        ax.bar(
+            height=sums,
+            x=np.arange(avg_lw, 1 - avg_lw, avg_lw),
+            width=0.15,
+            color=colors[i - 1],
+        )
         sums = sums - data.iloc[[i]].values[0]
 
     ax.set_xticks(np.arange(0, 1 + avg_lw, avg_lw).tolist())
