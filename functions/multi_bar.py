@@ -1,13 +1,14 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-def viz(df, class_avg, field, name, save_dir, max_num = 5):
+
+def viz(df, class_avg, field, name, save_dir, max_num=5):
     data = df.append(class_avg)
     colors = sns.color_palette("Set2")
-    colors[len(data) - 1] = 'red'
+    colors[len(data) - 1] = "red"
 
     fig, ax = plt.subplots(figsize=(6.5, 6))
-    plt.bar(height=data[field], x=data['Name'], color=colors)
+    plt.bar(height=data[field], x=data["Name"], color=colors)
 
     plt.title(name, fontsize=20)
     plt.ylabel(field, fontsize=16)
