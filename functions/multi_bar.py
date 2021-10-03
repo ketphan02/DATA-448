@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def viz(df, class_avg, field, name, save_dir, max_num = 5):
+
+def viz(df, class_avg, field, name, save_dir, max_num=5):
     data = df.append(class_avg)
     colors = sns.color_palette("Set2")
     colors[len(data) - 1] = 'red'
