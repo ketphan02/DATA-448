@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
+
 def viz(df, class_avg, field, name, save_dir, max_num=5):
     data = df.append(class_avg)
     colors = sns.color_palette("Set2")
