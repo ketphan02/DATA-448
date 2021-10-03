@@ -33,14 +33,17 @@ def viz(df, class_avg, name, save_dir, max_len=15):
     n = len(data)
     # graph_length = each_col_width * 2 * n + space * (n  + 1)
 
-    bar_loc = [
-        ((i + 1) * space) + (i * 2 * each_col_width) + each_col_width for i in range(n)
-    ]
+    bar_loc = [((i + 1) * space) + (i * 2 * each_col_width) + each_col_width
+               for i in range(n)]
     x_left = [x - each_col_width / 2 for x in bar_loc]
     x_right = [x + each_col_width / 2 for x in bar_loc]
 
     fig, ax = plt.subplots(figsize=(9, 6))
-    ax.bar(height=data, x=x_left, color=colors[0], align="center", width=each_col_width)
+    ax.bar(height=data,
+           x=x_left,
+           color=colors[0],
+           align="center",
+           width=each_col_width)
     ax.bar(
         height=class_avg,
         x=x_right,
