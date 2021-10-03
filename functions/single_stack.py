@@ -30,7 +30,5 @@ def viz(df, class_avg, field, name, save_dir, max_num=15):
     plt.yticks(np.arange(0, max_num + 1).tolist())
     plt.title(name, size=20)
 
-    sns.despine()
-
     plt.show()
     fig.savefig(save_dir, dpi=300)
