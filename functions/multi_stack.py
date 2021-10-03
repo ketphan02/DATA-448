@@ -1,48 +1,50 @@
 import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
+import seaborn as sns
 
 colors = sns.color_palette("Set2")
 
-def viz(df, class_avg, name, save_dir, max_len = 15) -> None:
-    '''
-	Visualize multiple stacked plot.
 
-	Parameters:
-	----------
-	df: pandas.dfFrame
-		dfframe to be visualized.
+def viz(df, name, save_dir, max_len=15) -> None:
+    """
+    Visualize multiple stacked plot.
+
+    Parameters:
+    ----------
+    df: pandas.DataFrame
+            Dataframe to be visualized.
 	class_avg: dfFrame or list
 		DataFrame or list of class average.
-	name: str
-		Title of the plot.
-	save_dir: str
-		Directory to save the visualization.
-	max_len: int
-		Maximum length of the y axis.
-    '''
+    name: str
+            Title of the plot.
+    save_dir: str
+            Directory to save the visualization.
+    max_len: int
+            Maximum length of the y axis.
+    """
 
     # Clean df for graph x labels
     fields = df.columns[1:].tolist()
-    fields.insert(0, '')
-    fields.append('')
-    
-    # Clean df for graph legend
-    labels = list(df["Name"])
+    fields.insert(0, "")
+    fields.append("")
+
+    # Clean data for graph legend
+    data = team_a
+    labels = list(data["Name"])
     labels.insert(0, "Average")
-    df = df.drop(columns='Name')
-    
+    data = data.drop(columns="Name")
+
     # padding for the graph x axis
-    avg = class_avg.drop(columns='Name').iloc[[0]].values[0].tolist()
+    avg = class_avg.drop(columns="Name").iloc[[0]].values[0].tolist()
     avg.insert(0, 0)
     avg.append(0)
-    
+
     # padding for the graph y axis
-    df.loc[len(df)] = 0
-    df.loc[-1] = 0
-    df.index = df.index + 1
-    df = df.sort_index()
-    
+    data.loc[len(data)] = 0
+    data.loc[-1] = 0
+    data.index = data.index + 1
+    data = data.sort_index()
+
     # visualize
     fig, ax = plt.subplots(figsize=(9, 6))
 
@@ -54,23 +56,30 @@ def viz(df, class_avg, name, save_dir, max_len = 15) -> None:
         if i > 1:
             ax.axhline(
                 y=avg[i],
-                xmax= width + (avg_lw / 2), xmin= width - (avg_lw / 2),
+                xmax=width + (avg_lw / 2),
+                xmin=width - (avg_lw / 2),
                 linewidth=3,
-                linestyle='--',
-                color='red',
-                label='_nolegend_'
+                linestyle="--",
+                color="red",
+                label="_nolegend_",
             )
         else:
             ax.axhline(
                 y=avg[i],
-                xmax= width + (avg_lw / 2), xmin= width - (avg_lw / 2),
+                xmax=width + (avg_lw / 2),
+                xmin=width - (avg_lw / 2),
                 linewidth=3,
-                linestyle='--',
-                color='red',
+                linestyle="--",
+                color="red",
             )
 
-        ax.bar(height=sums, x=np.arange(avg_lw, 1 - avg_lw, avg_lw), width=0.15, color=colors[i - 1])
-        sums = sums - df.iloc[[i]].values[0]
+        ax.bar(
+            height=sums,
+            x=np.arange(avg_lw, 1 - avg_lw, avg_lw),
+            width=0.15,
+            color=colors[i - 1],
+        )
+        sums = sums - data.iloc[[i]].values[0]
 
     ax.set_xticks(np.arange(0, 1 + avg_lw, avg_lw).tolist())
     plt.yticks(np.arange(0, max_len + 1).tolist())
