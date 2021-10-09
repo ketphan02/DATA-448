@@ -28,15 +28,18 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
     data = df[field]
     team_avg = sum(data) / len(data)
     avg = class_avg[field]
-    data = pd.DataFrame({
-        "Name": ["Team average", "Class average"],
-        "Score": [team_avg, avg],
-    })
+    data = pd.DataFrame(
+        {
+            "Name": ["Team average", "Class average"],
+            "Score": [team_avg, avg],
+        }
+    )
 
     fig, ax = plt.subplots(figsize=(6.5, 6))
 
     sns.barplot(data=data, x="Name", y="Score").set(
-        yticks=np.arange(0, max_num + 1).tolist())
+        yticks=np.arange(0, max_num + 1).tolist()
+    )
 
     plt.title(name, size=20)
     plt.xlabel(field, size=16)
