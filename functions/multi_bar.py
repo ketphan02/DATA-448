@@ -30,7 +30,8 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
     plt.bar(height=data[field], x=data["Name"], color=colors)
 
     plt.title(name, fontsize=20)
-    plt.ylabel(field, fontsize=16)
+    plt.xlabel(field, fontsize=16)
+    plt.ylabel("Score", fontsize=16)
     plt.yticks(np.arange(0, max_num + 1).tolist())
 
     plt.show()
