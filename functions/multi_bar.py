@@ -4,6 +4,7 @@ import seaborn as sns
 
 colors = sns.color_palette("Set2")
 
+
 def viz(df, class_avg, field, name, save_dir, max_num=5):
     """
     Visualize n bars with n people of a particular field plus one bar for the class average.
