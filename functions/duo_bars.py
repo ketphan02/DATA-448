@@ -57,6 +57,7 @@ def viz(df, class_avg, name, save_dir, max_len=15):
     plt.yticks(np.arange(0, max_len + 1).tolist())
     plt.title(name, fontsize=20)
     plt.legend(["Team Average", "Class average"], fontsize=12)
+    plt.ylabel("Score", fontsize=16)
 
     plt.show()
     fig.savefig(save_dir, dpi=300)
