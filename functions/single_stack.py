@@ -44,7 +44,7 @@ def viz(df, class_avg, field, name, save_dir, max_num=15):
 
     plt.legend(labels, fontsize=14)
     plt.xlabel(field, size=16)
-    plt.ylabel("Score", size=16)
+    plt.ylabel("Skill level(Total)", size=16)
     plt.xticks([])
     plt.yticks(np.arange(0, max_num + 1).tolist())
     plt.title(name, size=20)

@@ -34,13 +34,14 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
     })
 
     fig, ax = plt.subplots(figsize=(6.5, 6))
+    h = ax.bar(x=data['Name'], height=data['Score'], color=colors)
 
-    sns.barplot(data=data, x="Name",
-                y="Score").set(yticks=np.arange(0, max_num + 1).tolist())
-
+    ax.xaxis.set_ticklabels([])
+    plt.legend(h, data['Name'], loc='upper right', fontsize=14)
     plt.title(name, size=20)
     plt.xlabel(field, size=16)
-    plt.ylabel("Score", size=16)
+    plt.ylabel("Skill level (Average)", size=16)
+    plt.yticks(np.arange(0, max_num + 1).tolist())
 
     plt.show()
     fig.savefig(save_dir, dpi=300)
