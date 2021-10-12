@@ -28,16 +28,18 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
     data = df[field]
     team_avg = sum(data) / len(data)
     avg = class_avg[field]
-    data = pd.DataFrame({
-        "Name": ["Team average", "Class average"],
-        "Score": [team_avg, avg],
-    })
+    data = pd.DataFrame(
+        {
+            "Name": ["Team average", "Class average"],
+            "Score": [team_avg, avg],
+        }
+    )
 
     fig, ax = plt.subplots(figsize=(6.5, 6))
-    h = ax.bar(x=data['Name'], height=data['Score'], color=colors)
+    h = ax.bar(x=data["Name"], height=data["Score"], color=colors)
 
     ax.xaxis.set_ticklabels([])
-    plt.legend(h, data['Name'], loc='upper right', fontsize=14)
+    plt.legend(h, data["Name"], loc="upper right", fontsize=14)
     plt.title(name, size=20)
     plt.xlabel(field, size=16)
     plt.ylabel("Skill level (Average)", size=16)
