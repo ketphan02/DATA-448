@@ -25,14 +25,17 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
         The maximum length of y axis.
     """
     data = df.append(class_avg)
-    colors[len(data) - 1] = "red"
+    colors[len(data) - 1] = colors[-2]
 
     fig, ax = plt.subplots(figsize=(6.5, 6))
-    plt.bar(height=data[field], x=data["Name"], color=colors)
+    h = ax.bar(height=data[field], x=data["Name"], color=colors)
 
+    ax.legend(h, data["Name"], loc="upper right", fontsize=14)
     plt.title(name, fontsize=20)
-    plt.ylabel(field, fontsize=16)
+    plt.xlabel(field, fontsize=16)
+    plt.ylabel("Skill Level (Total)", fontsize=16)
     plt.yticks(np.arange(0, max_num + 1).tolist())
+    ax.xaxis.set_ticklabels([])
 
     plt.show()
     fig.savefig(save_dir, dpi=300)

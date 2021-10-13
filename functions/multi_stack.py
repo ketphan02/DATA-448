@@ -84,6 +84,7 @@ def viz(df, class_avg, name, save_dir, max_len=15) -> None:
     plt.yticks(np.arange(0, max_len + 1).tolist())
     ax.set_xticklabels(fields, fontsize=14)
     ax.set_title(name, fontsize=20)
+    plt.ylabel("Skill Level (Total)", fontsize=16)
     plt.legend(labels)
     plt.show()
     fig.savefig(save_dir, dpi=300)
