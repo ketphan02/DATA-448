@@ -1,37 +1,37 @@
 import cv2
 import dataframe_image as dfi
-import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
+import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
+
 def make_colormap():
-#     colors = ["#76EAD7", "#4CD3C2","#2FC4B2", "#12947F"] # blue
-    colors = ["#FCD2D1", "#FE8F8F", "#FF5C58", "#F54748"] # red
+    #     colors = ["#76EAD7", "#4CD3C2","#2FC4B2", "#12947F"] # blue
+    colors = ["#FCD2D1", "#FE8F8F", "#FF5C58", "#F54748"]  # red
     return mcolors.LinearSegmentedColormap.from_list("", colors)
-    
+
 
 def viz(csv_file, save_dir):
     df = pd.read_csv(csv_file, sep=";")
     df_display = df
     df = df.drop(labels="Name", axis=1)
-    df.loc['No. of members']= df.sum(axis=0)
-    df = df.drop(labels=[0,1,2,3], axis=0)
+    df.loc["No. of members"] = df.sum(axis=0)
+    df = df.drop(labels=[0, 1, 2, 3], axis=0)
 
     # Produce gridview
-    ax, fig = plt.subplots(figsize=(8,3))
-    ax = sns.heatmap(df, cmap=make_colormap(), yticklabels = False)
+    ax, fig = plt.subplots(figsize=(8, 3))
+    ax = sns.heatmap(df, cmap=make_colormap(), yticklabels=False)
     ax.collections[0].colorbar.set_ticks([0.0, 1.0, 2.0, 3.0, 4.0])
-    ax.set_xticklabels(
-        ax.get_xticklabels(), 
-        rotation=50, 
-        horizontalalignment = 'right'
-    )
+    ax.set_xticklabels(ax.get_xticklabels(),
+                       rotation=50,
+                       horizontalalignment="right")
     plt.tight_layout()
     plt.savefig("../../visualizations/section 2/temp/heatmap.png", dpi=300)
 
     # Produce tally
-    dfi.export(df_display, "../../visualizations/section 2/temp/dataframe_1.png")
+    dfi.export(df_display,
+               "../../visualizations/section 2/temp/dataframe_1.png")
 
     # Merge
     image1 = cv2.imread("../../visualizations/section 2/temp/heatmap.png")
