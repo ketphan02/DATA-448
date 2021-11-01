@@ -1,9 +1,9 @@
-import pandas as pd
+import cv2
+import dataframe_image as dfi
 import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
 from IPython.display import display
-import dataframe_image as dfi
-import cv2
 
 
 def viz(csv_file, save_dir):
