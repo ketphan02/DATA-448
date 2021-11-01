@@ -5,6 +5,7 @@ from IPython.display import display
 import dataframe_image as dfi
 import cv2
 
+
 def viz(csv_file, save_dir):
     df = pd.read_csv(csv_file, sep=';')
     df_display = df
@@ -18,9 +19,11 @@ def viz(csv_file, save_dir):
     fig = plt.figure(figsize=(20, 7))
     for i in range(len(df.columns.values)):
         ax = fig.add_subplot(2, len(df.columns.values) // 2, i + 1)
-        plt.bar(height=[0,4,0], x=['foo', df.columns.values[i], 'bar'], color='white')
-        plt.bar(height=[0, df.loc[4].values[i], 0], x=['foo', df.columns.values[i], 'bar'], color='#FF6B6B')
-        plt.yticks([0,4])
+        plt.bar(height=[0, 4, 0], x=[
+                'foo', df.columns.values[i], 'bar'], color='white')
+        plt.bar(height=[0, df.loc[4].values[i], 0], x=[
+                'foo', df.columns.values[i], 'bar'], color='#FF6B6B')
+        plt.yticks([0, 4])
         plt.xlim([df.columns.values[i], df.columns.values[i]])
         ax.spines['left'].set_color('black')
         ax.spines['top'].set_color('black')
@@ -46,5 +49,6 @@ def viz(csv_file, save_dir):
     size = (int(image1.shape[1] / ratio), int(image1.shape[0] / ratio))
     image1 = cv2.resize(image1, size, cv2.INTER_NEAREST)
     image = cv2.vconcat([image1, image2])
-    image = cv2.copyMakeBorder(image, 0, 20, 0, 0, cv2.BORDER_CONSTANT, None, value = [255,255,255])
+    image = cv2.copyMakeBorder(
+        image, 0, 20, 0, 0, cv2.BORDER_CONSTANT, None, value=[255, 255, 255])
     cv2.imwrite(save_dir, image)
