@@ -16,18 +16,14 @@ def viz(csv_file, save_dir):
     df = pd.read_csv(csv_file, sep=";")
     df_display = df
     df = df.drop(labels="Name", axis=1)
-    df.loc['No. of members'] = df.sum(axis=0)
+    df.loc["No. of members"] = df.sum(axis=0)
     df = df.drop(labels=[0, 1, 2, 3], axis=0)
 
     # Produce gridview
     ax, fig = plt.subplots(figsize=(8, 3))
     ax = sns.heatmap(df, cmap=make_colormap(), yticklabels=False)
     ax.collections[0].colorbar.set_ticks([0.0, 1.0, 2.0, 3.0, 4.0])
-    ax.set_xticklabels(
-        ax.get_xticklabels(),
-        rotation=50,
-        horizontalalignment='right'
-    )
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=50, horizontalalignment="right")
     plt.tight_layout()
     plt.savefig("../../visualizations/section 2/temp/heatmap.png", dpi=300)
 
@@ -41,12 +37,7 @@ def viz(csv_file, save_dir):
     size = (int(image1.shape[1] / ratio), int(image1.shape[0] / ratio))
     image1 = cv2.resize(image1, size, cv2.INTER_NEAREST)
     image = cv2.vconcat([image1, image2])
-    image = cv2.copyMakeBorder(image,
-                               0,
-                               20,
-                               0,
-                               0,
-                               cv2.BORDER_CONSTANT,
-                               None,
-                               value=[255, 255, 255])
+    image = cv2.copyMakeBorder(
+        image, 0, 20, 0, 0, cv2.BORDER_CONSTANT, None, value=[255, 255, 255]
+    )
     cv2.imwrite(save_dir, image)
