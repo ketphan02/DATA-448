@@ -62,7 +62,8 @@ def viz(csv_file, save_dir):
     table.scale(1, 12)
     ax.axis('off')
 
-    fig.savefig('../../visualizations/section 2/temp/dataframe.png', dpi=300, bbox_inches='tight',pad_inches = 0)
+    fig.savefig('../../visualizations/section 2/temp/dataframe.png',
+                dpi=300, bbox_inches='tight', pad_inches=0)
 
     # Merge
     image1 = cv2.imread("../../visualizations/section 2/temp/gridview.png")
@@ -72,7 +73,6 @@ def viz(csv_file, save_dir):
     ratio = image1.shape[1] / image2.shape[1]
     size = (int(image1.shape[1] / ratio), int(image1.shape[0] / ratio))
     image1 = cv2.resize(image1, size, cv2.INTER_NEAREST)
-
 
     image = cv2.vconcat([image1, image2])
     image = cv2.copyMakeBorder(image,
