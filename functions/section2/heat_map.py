@@ -7,13 +7,14 @@ import numpy as np
 
 from functions.section2 import tally
 
+
 def make_colormap():
     #     colors = ["#76EAD7", "#4CD3C2","#2FC4B2", "#12947F"] # blue
     colors = ["#FFFFFF", "#FFB344", "#F54748"]  # red
     return mcolors.LinearSegmentedColormap.from_list("", colors)
 
 
-def viz(csv_file, title, save_dir, need_tally = False):
+def viz(csv_file, title, save_dir, need_tally=False):
     df = pd.read_csv(csv_file, sep=";")
     df_display = df
     num_user = df.shape[0]
@@ -23,7 +24,8 @@ def viz(csv_file, title, save_dir, need_tally = False):
 
     # Produce gridview
     ax, fig = plt.subplots(figsize=(9, 4.5))
-    ax = sns.heatmap(df, cmap=make_colormap(), yticklabels=False, vmin=0, vmax=num_user)
+    ax = sns.heatmap(df, cmap=make_colormap(),
+                     yticklabels=False, vmin=0, vmax=num_user)
     ax.collections[0].colorbar.set_ticks(np.arange(0, num_user + 1, 1))
     ax.set_xticklabels(ax.get_xticklabels(),
                        rotation=50,
@@ -39,7 +41,8 @@ def viz(csv_file, title, save_dir, need_tally = False):
 
         # Merge
         image1 = cv2.imread("../../visualizations/section 2/temp/heatmap.png")
-        image2 = cv2.imread("../../visualizations/section 2/temp/dataframe_1.png")
+        image2 = cv2.imread(
+            "../../visualizations/section 2/temp/dataframe_1.png")
         image2 = cv2.copyMakeBorder(image2,
                                     0,
                                     0,

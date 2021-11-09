@@ -5,7 +5,7 @@ import pandas as pd
 from functions.section2 import tally
 
 
-def viz(csv_file, title, save_dir, need_tally = False):
+def viz(csv_file, title, save_dir, need_tally=False):
     df = pd.read_csv(csv_file, sep=";")
     df_display = df
     num_ppl = df.shape[0]
@@ -39,7 +39,7 @@ def viz(csv_file, title, save_dir, need_tally = False):
         plt.ylim((0, num_ppl))
         plt.yticks([])
 
-    fig.suptitle(title, fontsize = 50)
+    fig.suptitle(title, fontsize=50)
     plt.tight_layout()
     plt.subplots_adjust(wspace=0, hspace=0)
 
@@ -51,7 +51,8 @@ def viz(csv_file, title, save_dir, need_tally = False):
 
         # Merge
         image1 = cv2.imread("../../visualizations/section 2/temp/gridview.png")
-        image2 = cv2.imread("../../visualizations/section 2/temp/dataframe.png")
+        image2 = cv2.imread(
+            "../../visualizations/section 2/temp/dataframe.png")
         image2 = cv2.copyMakeBorder(image2,
                                     0,
                                     0,
