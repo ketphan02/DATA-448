@@ -1,9 +1,9 @@
 import cv2
 import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import seaborn as sns
-import numpy as np
 
 from functions.section2 import tally
 
