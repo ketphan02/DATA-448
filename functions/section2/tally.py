@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 
-def viz(df, save_dir, title = ''):
+
+def viz(df, save_dir, title=""):
     info = []
     labels = df.columns.tolist()
     for i in range(df.shape[0]):
