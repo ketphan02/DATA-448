@@ -19,9 +19,11 @@ def viz(csv_file, title, save_dir, need_tally=False):
     fig = plt.figure(figsize=(20, 7))
     for i in range(len(df.columns.values)):
         ax = fig.add_subplot(2, len(df.columns.values) // 2, i + 1)
-        plt.bar(height=[0, num_ppl, 0],
-                x=["foo", df.columns.values[i], "bar"],
-                color="white")
+        plt.bar(
+            height=[0, num_ppl, 0],
+            x=["foo", df.columns.values[i], "bar"],
+            color="white",
+        )
         plt.bar(
             height=[0, df.loc[num_ppl].values[i], 0],
             x=["foo", df.columns.values[i], "bar"],
@@ -51,15 +53,10 @@ def viz(csv_file, title, save_dir, need_tally=False):
 
         # Merge
         image1 = cv2.imread("../../visualizations/section 2/temp/gridview.png")
-        image2 = cv2.imread(
-            "../../visualizations/section 2/temp/dataframe.png")
-        image2 = cv2.copyMakeBorder(image2,
-                                    0,
-                                    0,
-                                    100,
-                                    100,
-                                    cv2.BORDER_CONSTANT,
-                                    value=[255, 255, 255])
+        image2 = cv2.imread("../../visualizations/section 2/temp/dataframe.png")
+        image2 = cv2.copyMakeBorder(
+            image2, 0, 0, 100, 100, cv2.BORDER_CONSTANT, value=[255, 255, 255]
+        )
         ratio = image1.shape[1] / image2.shape[1]
         size = (int(image1.shape[1] / ratio), int(image1.shape[0] / ratio))
         image1 = cv2.resize(image1, size, cv2.INTER_NEAREST)
