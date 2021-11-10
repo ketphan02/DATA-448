@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def viz(df, save_dir, title=""):
+def viz(df, save_dir, fontSize = 14, title=""):
     info = []
     labels = df.columns.tolist()
     for i in range(df.shape[0]):
@@ -16,7 +16,7 @@ def viz(df, save_dir, title=""):
 
     fig, ax = plt.subplots(figsize=(10, 10))
     table = ax.table(info, loc="center")
-    table.set_fontsize(14)
+    table.set_fontsize(fontSize)
     table.scale(1, 12)
     ax.axis("off")
     plt.title(title)

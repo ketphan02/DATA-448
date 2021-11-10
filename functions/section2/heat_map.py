@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-from functions.section2 import tally
+from functions.section2 import tallyWOFS
 
 
 def make_colormap():
@@ -40,7 +40,7 @@ def viz(csv_file, title, save_dir, need_tally=False):
         plt.savefig("../../visualizations/section 2/temp/heatmap.png", dpi=300)
 
         # Produce tally
-        tally.viz(df_display,
+        tallyWOFS.viz(df_display,
                   "../../visualizations/section 2/temp/dataframe_1.png")
 
         # Merge
