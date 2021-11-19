@@ -31,11 +31,7 @@ def viz(df, class_avg, name, save_dir, max_len=5) -> None:
     colors[len(data) - 1] = colors[-2]
 
     for i, pos in enumerate(pos_s):
-        h = ax.bar(x=pos,
-                   height=values[i],
-                   width=w,
-                   align="center",
-                   color=colors)
+        h = ax.bar(x=pos, height=values[i], width=w, align="center", color=colors)
 
     bars_loc = [x + w // 2 for x in bars_loc]
     # plt.legend(h, legend_labels, fontsize=14)
@@ -44,8 +40,14 @@ def viz(df, class_avg, name, save_dir, max_len=5) -> None:
     plt.ylabel("Skill Level (Total)", fontsize=16)
     ax.set_xticklabels(labels, fontsize=16)
     plt.yticks(np.arange(0, max_len + 1).tolist())
-    plt.legend(h, legend_labels, fontsize=14,
-               bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+    plt.legend(
+        h,
+        legend_labels,
+        fontsize=14,
+        bbox_to_anchor=(1.05, 1),
+        loc=2,
+        borderaxespad=0.0,
+    )
     plt.show()
 
     fig.savefig(save_dir, dpi=300)
