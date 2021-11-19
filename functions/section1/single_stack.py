@@ -42,12 +42,12 @@ def viz(df, class_avg, field, name, save_dir, max_num=15):
                width=1)
         sums -= data[i]
 
-    plt.legend(labels, fontsize=14)
     plt.xlabel(field, size=16)
     plt.ylabel("Skill level(Total)", size=16)
     plt.xticks([])
     plt.yticks(np.arange(0, max_num + 1).tolist())
     plt.title(name, size=20)
+    plt.legend(labels, fontsize=14, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 
     plt.show()
     fig.savefig(save_dir, dpi=300)
