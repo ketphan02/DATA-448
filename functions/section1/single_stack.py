@@ -31,11 +31,15 @@ def viz(df, class_avg, field, name, save_dir, max_num=15):
     labels.insert(0, "Average")
 
     fig, ax = plt.subplots(figsize=(6.5, 6))
-    ax.plot(
-        ["foo", field, "bar"], [avg * 3] * 3, linestyle="--", color="red", linewidth=3
-    )
+    ax.plot(["foo", field, "bar"], [avg * 3] * 3,
+            linestyle="--",
+            color="red",
+            linewidth=3)
     for i in range(len(data) - 1, -1, -1):
-        ax.bar(height=[0, sums, 0], x=["foo", field, "bar"], color=colors[i], width=1)
+        ax.bar(height=[0, sums, 0],
+               x=["foo", field, "bar"],
+               color=colors[i],
+               width=1)
         sums -= data[i]
 
     plt.xlabel(field, size=16)
@@ -43,7 +47,11 @@ def viz(df, class_avg, field, name, save_dir, max_num=15):
     plt.xticks([])
     plt.yticks(np.arange(0, max_num + 1).tolist())
     plt.title(name, size=20)
-    plt.legend(labels, fontsize=14, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
+    plt.legend(labels,
+               fontsize=14,
+               bbox_to_anchor=(1.05, 1),
+               loc=2,
+               borderaxespad=0.0)
 
     plt.show()
     fig.savefig(save_dir, dpi=300)
