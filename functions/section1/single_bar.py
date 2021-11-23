@@ -9,7 +9,6 @@ colors = sns.color_palette("Set2")
 def viz(df, class_avg, field, name, save_dir, max_num=5):
     """
     Visualize two bar graphs (choosen field and class average of that field).
-
     Parameters
     ----------
     df: pandas.DataFrame
@@ -37,11 +36,16 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
     h = ax.bar(x=data["Name"], height=data["Score"], color=colors)
 
     ax.xaxis.set_ticklabels([])
-    plt.legend(h, data["Name"], loc="upper right", fontsize=14)
     plt.title(name, size=20)
     plt.xlabel(field, size=16)
     plt.ylabel("Skill level (Average)", size=16)
     plt.yticks(np.arange(0, max_num + 1).tolist())
+    plt.legend(h,
+               data["Name"],
+               fontsize=14,
+               bbox_to_anchor=(1.05, 1),
+               loc=2,
+               borderaxespad=0.0)
 
     plt.show()
     fig.savefig(save_dir, dpi=300)
