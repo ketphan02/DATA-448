@@ -1,11 +1,13 @@
 import cv2
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 from functions.section2 import tally
 
 
 def viz(csv_file, title, save_dir, need_tally=False):
+    colors = sns.color_palette("Set2")
     df = pd.read_csv(csv_file, sep=";")
     df_display = df
     num_ppl = df.shape[0]
@@ -29,6 +31,14 @@ def viz(csv_file, title, save_dir, need_tally=False):
             x=["foo", df.columns.values[i], "bar"],
             color="#FF6B6B",
         )
+        total = df.loc[num_ppl].values[i]
+        for j in range(num_ppl - 1, 0, -1):
+            plt.bar(
+                height=[0, total, 0],
+                x=["foo", df.columns.values[i], "bar"],
+                color=colors[j],
+            )
+            total -= df.loc[j].values[i]
         plt.yticks([0, num_ppl])
         plt.xlim([df.columns.values[i], df.columns.values[i]])
         ax.spines["left"].set_color("black")
