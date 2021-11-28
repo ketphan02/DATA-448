@@ -8,7 +8,6 @@ colors = sns.color_palette("Set2")
 def viz(df, class_avg, field, name, save_dir, max_num=15):
     """
     Visualize the single stacked plot for a single field with a line representing class average crossing the graph.
-
     Parameters
     ----------
     df: pandas.DataFrame
@@ -28,7 +27,7 @@ def viz(df, class_avg, field, name, save_dir, max_num=15):
     sums = sum(data)
     avg = class_avg[field]
     labels = list(df["Name"])[::-1]
-    labels.insert(0, "Average")
+    labels.insert(0, "Class Average")
 
     fig, ax = plt.subplots(figsize=(6.5, 6))
     ax.plot(["foo", field, "bar"], [avg * 3] * 3,

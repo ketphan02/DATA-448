@@ -8,7 +8,6 @@ colors = sns.color_palette("Set2")
 def viz(df, class_avg, name, save_dir, max_len=15) -> None:
     """
     Visualize multiple stacked plot.
-
     Parameters:
     ----------
     df: pandas.DataFrame
@@ -30,7 +29,7 @@ def viz(df, class_avg, name, save_dir, max_len=15) -> None:
 
     # Clean df for graph legend
     labels = list(df["Name"])
-    labels.insert(0, "Average")
+    labels.insert(0, "Class Average")
     df = df.drop(columns="Name")
 
     # padding for the graph x axis

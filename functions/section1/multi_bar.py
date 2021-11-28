@@ -2,13 +2,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
-colors = sns.color_palette("Set2")
 
 
 def viz(df, class_avg, field, name, save_dir, max_num=5):
     """
     Visualize n bars with n people of a particular field plus one bar for the class average.
-
     Parameters
     ----------
     df: pandas.DataFrame
@@ -24,6 +22,7 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
     max_num: int (default=5)
         The maximum length of y axis.
     """
+    colors = sns.color_palette("Set2")
     data = df.append(class_avg)
     colors[len(data) - 1] = colors[-2]
 
