@@ -28,7 +28,7 @@ def viz(csv_file, title, save_dir, need_tally=False):
         if len(df_names) == 4:
             h = plt.bar(
                 height=[0, 0, 0, 0],
-                x=["foo", df.columns.values[i], "bar", 'ok'],
+                x=["foo", df.columns.values[i], "bar", "ok"],
                 color=colors,
             )
         elif len(df_names) == 3:
@@ -70,25 +70,19 @@ def viz(csv_file, title, save_dir, need_tally=False):
     plt.subplots_adjust(wspace=0, hspace=0)
 
     if need_tally:
-        fig.savefig("../../visualizations/section 2/temp/gridview.png",
-                    dpi=300)
+        fig.savefig("../../visualizations/section 2/temp/gridview.png", dpi=300)
 
         # Produce tally
-        tally.viz(df_display,
-                  "../../visualizations/section 2/temp/dataframe.png",
-                  fontSize)
+        tally.viz(
+            df_display, "../../visualizations/section 2/temp/dataframe.png", fontSize
+        )
 
         # Merge
         image1 = cv2.imread("../../visualizations/section 2/temp/gridview.png")
-        image2 = cv2.imread(
-            "../../visualizations/section 2/temp/dataframe.png")
-        image2 = cv2.copyMakeBorder(image2,
-                                    0,
-                                    0,
-                                    100,
-                                    100,
-                                    cv2.BORDER_CONSTANT,
-                                    value=[255, 255, 255])
+        image2 = cv2.imread("../../visualizations/section 2/temp/dataframe.png")
+        image2 = cv2.copyMakeBorder(
+            image2, 0, 0, 100, 100, cv2.BORDER_CONSTANT, value=[255, 255, 255]
+        )
         ratio = image1.shape[1] / image2.shape[1]
         size = (int(image1.shape[1] / ratio), int(image1.shape[0] / ratio))
         image1 = cv2.resize(image1, size, cv2.INTER_NEAREST)
