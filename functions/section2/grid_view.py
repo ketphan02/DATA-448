@@ -28,7 +28,7 @@ def viz(csv_file, title, save_dir, need_tally=False):
         if len(df_names) == 4:
             h = plt.bar(
                 height=[0, 0, 0, 0],
-                x=["foo", df.columns.values[i], "bar", 'ok'],
+                x=["foo", df.columns.values[i], "bar", "ok"],
                 color=colors,
             )
         elif len(df_names) == 3:
