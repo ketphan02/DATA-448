@@ -31,11 +31,7 @@ def viz(df, class_avg, name, save_dir, max_len=5) -> None:
     colors[len(data) - 1] = colors[-2]
 
     for i, pos in enumerate(pos_s):
-        h = ax.bar(x=pos,
-                   height=values[i],
-                   width=w,
-                   align="center",
-                   color=colors)
+        h = ax.bar(x=pos, height=values[i], width=w, align="center", color=colors)
 
     bars_loc = [x + w // 2 for x in bars_loc]
     # plt.legend(h, legend_labels, fontsize=14)
