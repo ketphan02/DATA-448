@@ -33,9 +33,12 @@ def viz(df, class_avg, field, name, save_dir, max_num=5):
     plt.ylabel("Skill Level (Total)", fontsize=16)
     plt.yticks(np.arange(0, max_num + 1).tolist())
     ax.xaxis.set_ticklabels([])
-    plt.legend(
-        h, data["Name"], fontsize=14, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0
-    )
+    plt.legend(h,
+               data["Name"],
+               fontsize=14,
+               bbox_to_anchor=(1.05, 1),
+               loc=2,
+               borderaxespad=0.0)
 
     plt.show()
     fig.savefig(save_dir, dpi=300)
