@@ -3,7 +3,6 @@ import numpy as np
 import seaborn as sns
 
 
-
 def viz(df, class_avg, field, name, save_dir, max_num=5):
     """
     Visualize n bars with n people of a particular field plus one bar for the class average.

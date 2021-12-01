@@ -41,7 +41,7 @@ def viz(csv_file, title, save_dir, need_tally=False):
 
         # Produce tally
         tallyWOFS.viz(df_display,
-                  "../../visualizations/section 2/temp/dataframe_1.png")
+                      "../../visualizations/section 2/temp/dataframe_1.png")
 
         # Merge
         image1 = cv2.imread("../../visualizations/section 2/temp/heatmap.png")
