@@ -12,7 +12,6 @@ def viz(csv_file, title, save_dir, need_tally=False):
     df_display = df
     num_ppl = df.shape[0]
     df_names = df["Name"].tolist()
-    df_names.append("Total")
     df_rows = df.shape[0]
     df = df.drop(columns="Name")
     df.loc[df_rows] = df.sum()
@@ -26,13 +25,20 @@ def viz(csv_file, title, save_dir, need_tally=False):
             x=["foo", df.columns.values[i], "bar"],
             color="white",
         )
-        plt.bar(
-            height=[0, df.loc[num_ppl].values[i], 0],
-            x=["foo", df.columns.values[i], "bar"],
-            color="#FF6B6B",
-        )
+        if len(df_names) == 4:
+            h = plt.bar(
+                height=[0, 0, 0, 0],
+                x=["foo", df.columns.values[i], "bar", 'ok'],
+                color=colors,
+            )
+        elif len(df_names) == 3:
+            h = plt.bar(
+                height=[0, 0, 0],
+                x=["foo", df.columns.values[i], "bar"],
+                color=colors,
+            )
         total = df.loc[num_ppl].values[i]
-        for j in range(num_ppl - 1, 0, -1):
+        for j in range(num_ppl - 1, -1, -1):
             plt.bar(
                 height=[0, total, 0],
                 x=["foo", df.columns.values[i], "bar"],
@@ -51,6 +57,14 @@ def viz(csv_file, title, save_dir, need_tally=False):
         plt.ylim((0, num_ppl))
         plt.yticks([])
 
+    fig.legend(
+        h,
+        df_names,
+        fontsize=14,
+        bbox_to_anchor=(1, 1),
+        loc=2,
+        borderaxespad=0.0,
+    )
     fig.suptitle(title, fontsize=50)
     plt.tight_layout()
     plt.subplots_adjust(wspace=0, hspace=0)
