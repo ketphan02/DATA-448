@@ -12,7 +12,7 @@ def viz(df, save_dir, title=""):
             if data[j] == 1:
                 avail.append(labels[j])
 
-        info.append([data[0], "Choose:\n" + "\n".join(avail)])
+        info.append([data[0], "Selected:\n" + "\n".join(avail)])
 
     fig, ax = plt.subplots(figsize=(10, 10))
     table = ax.table(info, loc="center")
