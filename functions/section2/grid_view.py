@@ -6,7 +6,7 @@ import seaborn as sns
 from functions.section2 import tally
 
 
-def viz(csv_file, title, save_dir, need_tally=False):
+def viz(csv_file, title, save_dir, fontSize=14, need_tally=False):
     colors = sns.color_palette("Set2")
     df = pd.read_csv(csv_file, sep=";")
     df_display = df
@@ -75,8 +75,7 @@ def viz(csv_file, title, save_dir, need_tally=False):
 
         # Produce tally
         tally.viz(df_display,
-                  "../../visualizations/section 2/temp/dataframe.png",
-                  fontSize)
+                  "../../visualizations/section 2/temp/dataframe.png", fontSize)
 
         # Merge
         image1 = cv2.imread("../../visualizations/section 2/temp/gridview.png")
