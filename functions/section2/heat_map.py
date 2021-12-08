@@ -24,15 +24,9 @@ def viz(csv_file, title, save_dir, need_tally=False):
 
     # Produce gridview
     ax, fig = plt.subplots(figsize=(9, 4.5))
-    ax = sns.heatmap(df,
-                     cmap=make_colormap(),
-                     yticklabels=False,
-                     vmin=0,
-                     vmax=num_user)
+    ax = sns.heatmap(df, cmap=make_colormap(), yticklabels=False, vmin=0, vmax=num_user)
     ax.collections[0].colorbar.set_ticks(np.arange(0, num_user + 1, 1))
-    ax.set_xticklabels(ax.get_xticklabels(),
-                       rotation=50,
-                       horizontalalignment="right")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=50, horizontalalignment="right")
     plt.title(title, fontsize=25, y=1.1)
     plt.tight_layout()
 
@@ -40,20 +34,14 @@ def viz(csv_file, title, save_dir, need_tally=False):
         plt.savefig("../../visualizations/section 2/temp/heatmap.png", dpi=300)
 
         # Produce tally
-        tallyWOFS.viz(df_display,
-                      "../../visualizations/section 2/temp/dataframe_1.png")
+        tallyWOFS.viz(df_display, "../../visualizations/section 2/temp/dataframe_1.png")
 
         # Merge
         image1 = cv2.imread("../../visualizations/section 2/temp/heatmap.png")
-        image2 = cv2.imread(
-            "../../visualizations/section 2/temp/dataframe_1.png")
-        image2 = cv2.copyMakeBorder(image2,
-                                    0,
-                                    0,
-                                    100,
-                                    100,
-                                    cv2.BORDER_CONSTANT,
-                                    value=[255, 255, 255])
+        image2 = cv2.imread("../../visualizations/section 2/temp/dataframe_1.png")
+        image2 = cv2.copyMakeBorder(
+            image2, 0, 0, 100, 100, cv2.BORDER_CONSTANT, value=[255, 255, 255]
+        )
         ratio = image1.shape[1] / image2.shape[1]
         size = (int(image1.shape[1] / ratio), int(image1.shape[0] / ratio))
         image1 = cv2.resize(image1, size, cv2.INTER_NEAREST)
