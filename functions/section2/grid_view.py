@@ -75,7 +75,8 @@ def viz(csv_file, title, save_dir, fontSize=14, need_tally=False):
 
         # Produce tally
         tally.viz(df_display,
-                  "../../visualizations/section 2/temp/dataframe.png", fontSize)
+                  "../../visualizations/section 2/temp/dataframe.png",
+                  fontSize)
 
         # Merge
         image1 = cv2.imread("../../visualizations/section 2/temp/gridview.png")
