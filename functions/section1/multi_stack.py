@@ -90,4 +90,4 @@ def viz(df, class_avg, name, save_dir, max_len=15) -> None:
                loc=2,
                borderaxespad=0.0)
     plt.show()
-    fig.savefig(save_dir, dpi=300)
+    fig.savefig(save_dir, dpi=300, bbox_inches='tight')

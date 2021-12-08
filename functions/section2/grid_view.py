@@ -94,4 +94,4 @@ def viz(csv_file, title, save_dir, fontSize=14, need_tally=False):
         image = cv2.vconcat([image1, image2])
         cv2.imwrite(save_dir, image)
     else:
-        fig.savefig(save_dir, dpi=300)
+        fig.savefig(save_dir, dpi=300, bbox_inches='tight')

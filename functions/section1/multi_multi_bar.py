@@ -54,4 +54,4 @@ def viz(df, class_avg, name, save_dir, max_len=5) -> None:
     )
     plt.show()
 
-    fig.savefig(save_dir, dpi=300)
+    fig.savefig(save_dir, dpi=300, bbox_inches='tight')
