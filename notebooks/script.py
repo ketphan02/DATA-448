@@ -54,13 +54,14 @@ def check_confused(dfs):
         count = len(question)
         question = df[question]
         counts = [int(question[val][0] == "I can't tell from the graphs") + int(question[val][1] == "I can't tell from the graphs") for val in question]
-        plt.plot(np.arange(0,len(counts)), counts)
+        plt.plot(np.arange(1,len(counts)+1), counts)
     # Axis title need to be added
     plt.xlabel("Question Number")
-    plt.xticks(np.arange(0, count, 1))
-    plt.ylabel("No. of Clicks per question")
-    labels = ['Version ' + str(i) for i in range(len(dfs))]
+    plt.xticks(np.arange(1, count, 1))
+    plt.ylabel("""No. of time "I can't tell from graphs" was selected""")
+    labels = ['Version ' + str(i+1) for i in range(len(dfs))]
     plt.legend(labels, loc='upper right')
+    plt.title("""visualization of check_confused""")
     plt.show()
 
 def time_display(df, title, res1, res2):
