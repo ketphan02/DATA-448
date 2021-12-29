@@ -135,6 +135,8 @@ def check_confused(dfs):
     plt.xlabel("Question Number")
     plt.xticks(np.arange(1, count, 1))
     plt.ylabel("""No. of time "I can't tell from graphs" was selected""")
+    plt.ylim(-0.2, 2.2)
+    plt.yticks([0, 1, 2])
     labels = ['Version ' + str(i+1) for i in range(len(dfs))]
     plt.legend(labels, loc='upper right')
     plt.show()
