@@ -1,7 +1,80 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import ttest_ind
+from scipy.stats import f_oneway
 
+viz = {
+    'grouped': [list(np.arange(1,17)), list(np.arange(17, 33))],
+    'stacked': [list(np.arange(17,33)), list(np.arange(1,17))],
+    'gridview': [list(np.arange(1,19)), list(np.arange(37,55)), list(np.arange(19,37))],
+    'heatmap': [list(np.arange(19,37)), list(np.arange(1,19)), list(np.arange(37,55))],
+    'tally': [list(np.arange(37,55)), list(np.arange(19,37)), list(np.arange(1,19))]
+}
+
+def get_viz_time(dfs, viz_type):
+    """Gets average time per visualization for all the version"""
+    versions = []
+    data = viz[viz_type]
+    length = 2 * len(data[0])
+    for df in dfs:
+        sm = 0
+        for i in range(len(data)):
+            if i < 2:
+                df_t = df.iloc[i]
+                for j in range(len(data[i])):
+                    sm += float(df_t[f'Q{data[i][j]}_Page Submit'])
+        versions.append(sm / length)
+    return versions
+
+def getVizAccuracy(dfs, section, vizType, ver):
+    """for the given dataframe and visualization, gets the average accuracy for each version"""
+    versions = []
+    listOfQno = viz[vizType]
+    # gets a df of all the choices made by the responders in the question variable
+    j = 0
+    for df in dfs:
+        question = [col for i, col in enumerate(df.columns) if i > 17 and col.startswith('Q') and len(col.split()) == 1]
+        question = df[question]
+        correct = pd.read_csv(f'../report/answer/section {str(ver)}/{section+str(j+1)}.csv', delimiter= ";")
+        accurayR1 = [question.loc[0][i-1] == correct.loc[0][i-1] for i in listOfQno[j]]
+        accurayR2 = [question.loc[1][i-1] == correct.loc[0][i-1] for i in listOfQno[j]]
+        r1 = pd.DataFrame(accurayR1)
+        r2 = pd.DataFrame(accurayR2)
+        numCorAnsR1 = r1[r1[0] == 1]
+        numCorAnsR2 = r2[r2[0] == 1]
+        perR1 = (len(numCorAnsR1)/len(correct.loc[0]))*100
+        perR2 = (len(numCorAnsR2)/len(correct.loc[0]))*100
+        avg = (perR1 + perR2)/2
+        versions.append(avg)
+        j+=1
+    return versions
+
+def t_test(df1, df2):
+    """Culculates t-test between two average time and returns the p value"""
+    time_1 = []
+    time_2 = []
+    for field in df1:
+        if ('_Page Submit' in field):
+            time_1 = time_1 + [df1[field][0], df1[field][1]]
+    
+    for field in df2:
+        if ('_Page Submit' in field):
+            time_2 = time_2 + [df2[field][0], df2[field][1]]
+
+    a = np.array(time_1, dtype=float)
+    b = np.array(time_2, dtype=float)
+    return ttest_ind(a, b)[1]
+
+def anova_test(dfs):
+    time = []
+    for df in dfs:
+        temp = []
+        for field in df:
+            if ('_Page Submit' in field):
+                temp = temp + [df[field][0], df[field][1]]
+        time.append(np.array(temp, dtype=float))
+    return f_oneway(*time)[1]
 
 def clean_name(df):
     new_cols = df.columns.tolist()[:17]
@@ -20,10 +93,14 @@ def clean_name(df):
     return df.rename(columns=name_change)
 
 def get_correct_ans(df, answer_dir, id):
+
+    # gets a df of all the choices made by the responders in the question variable
     question = [col for i, col in enumerate(df.columns) if i > 17 and col.startswith('Q') and len(col.split()) == 1]
     question = df[question]
 
+    # imports the right answers
     correct = pd.read_csv(answer_dir, delimiter= ";")
+    # takes first two responders from df and compare their choices with the correct answer
     accurayR1 = [question.loc[0][i] == correct.loc[0][i] for i in range(len(correct.loc[0]))]
     accurayR2 = [question.loc[1][i] == correct.loc[0][i] for i in range(len(correct.loc[0]))]
 
@@ -41,8 +118,7 @@ def get_correct_ans(df, answer_dir, id):
         'Id': id,
         'Num. Questions': [len(correct.loc[0]), len(correct.loc[0])],
         'Correct Answer': [len(numCorAnsR1), len(numCorAnsR2)],
-        'Accuracy': [f'{perR1:.2f}%', f'{perR2:.2f}%'],
-        'Average Accuracy': [f'{avg:.2f}%', f'{avg:.2f}%']
+        'Accuracy': [f'{perR1:.2f}%', f'{perR2:.2f}%']
         }))
     return avg
 
@@ -61,7 +137,6 @@ def check_confused(dfs):
     plt.ylabel("""No. of time "I can't tell from graphs" was selected""")
     labels = ['Version ' + str(i+1) for i in range(len(dfs))]
     plt.legend(labels, loc='upper right')
-    plt.title("""visualization of check_confused""")
     plt.show()
 
 def time_display(df, title, res1, res2):
